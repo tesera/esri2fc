@@ -12,6 +12,7 @@
   "dependencies": {
     "co": "^4.6.0",
     "co-request": "^1.0.0",
+    "commander": "^2.9.0",
     "terraformer-arcgis-parser": "^1.0.5"
   }
 }
