@@ -6,9 +6,11 @@ let endpoint;
 program
   .version('0.0.1')
   .arguments('<url>')
-  .option('-w, --where [clause]', 'Where clause [clause]', '1=1')
-  .option('-f, --outFields [fields]', 'Out fields [fields]')
-  .option('-g, --returnGeometry', 'Return geometry')
+  .option('--where [clause]', 'Where clause [clause]', '1=1')
+  .option('--outFields [fields]', 'Out fields [fields]', '*')
+  .option('--returnGeometry', 'If true, the result set includes the geometry associated with each result. The default is false.')
+  .option('--maxAllowableOffset [offset]', 'This option can be used to specify the maxAllowableOffset to be used for generalizing geometries returned by the query operation.')
+  .option('--geometryPrecision [precision]', 'This option can be used to specify the number of decimal places in the response geometries returned by the query operation.')
   .action(function (url) {
      endpoint = url;
   });
@@ -21,7 +23,10 @@ var options = {
     returnGeometry: program.returnGeometry || false
 };
 
-// http://gisonline.abmi.ca:6080/arcgis/rest/services/portal_boundaries/admin_boundaries/MapServer
+if (program.maxAllowableOffset) options.maxAllowableOffset = parseInt(program.maxAllowableOffset);
+if (program.geometryPrecision) options.geometryPrecision = parseInt(program.geometryPrecision);
+
+// http://142.244.87.220:6080/arcgis/rest/services/portal_boundaries/admin_boundaries/MapServer
 
 quesri(endpoint, options, function (err, result) { 
     if (err) console.error(err);
