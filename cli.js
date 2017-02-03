@@ -1,5 +1,5 @@
 var program = require('commander');
-var quesri = require('./');
+var esri2fc = require('./');
 
 let endpoint;
 
@@ -26,9 +26,7 @@ var options = {
 if (program.maxAllowableOffset) options.maxAllowableOffset = parseInt(program.maxAllowableOffset);
 if (program.geometryPrecision) options.geometryPrecision = parseInt(program.geometryPrecision);
 
-// http://142.244.87.220:6080/arcgis/rest/services/portal_boundaries/admin_boundaries/MapServer
-
-quesri(endpoint, options, function (err, result) { 
+esri2fc(endpoint, options, function (err, result) { 
     if (err) console.error(err);
     console.log(JSON.stringify(result));
 });

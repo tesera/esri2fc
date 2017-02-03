@@ -14,7 +14,7 @@ function* query (url, options) {
     return JSON.parse(res.body);
 }
 
-function quesri (url, options, callback) {
+function esri2fc (url, options, callback) {
     co(function* () {
         const serviceMeta = yield info(url);
         const layers = serviceMeta.layers.map(layer => `${url}/${layer.id}`);
@@ -33,4 +33,4 @@ function quesri (url, options, callback) {
     }, callback);
 }
 
-module.exports = quesri;
+module.exports = esri2fc;
